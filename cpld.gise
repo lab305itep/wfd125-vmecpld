@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<generated_project xmlns="http://www.xilinx.com/XMLSchema" xmlns:xil_pn="http://www.xilinx.com/XMLSchema">
+
+  <!--                                                          -->
+
+  <!--             For tool use only. Do not edit.              -->
+
+  <!--                                                          -->
+
+  <!-- ProjectNavigator created generated project file.         -->
+
+  <!-- For use in tracking generated file and other information -->
+
+  <!-- allowing preservation of process status.                 -->
+
+  <!--                                                          -->
+
+  <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved. -->
+
+  <version xmlns="http://www.xilinx.com/XMLSchema">11.1</version>
+
+  <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="cpld.xise"/>
+
+  <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="_ngo"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+    <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="vmecpld.bld"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_CHK" xil_pn:name="vmecpld.chk"/>
+    <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="vmecpld.cmd_log"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_CXT" xil_pn:name="vmecpld.cxt"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_GYD" xil_pn:name="vmecpld.gyd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_JEDEC" xil_pn:name="vmecpld.jed"/>
+    <file xil_pn:fileType="FILE_LOG" xil_pn:name="vmecpld.log"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="vmecpld.lso"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_MFD" xil_pn:name="vmecpld.mfd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGA" xil_pn:name="vmecpld.nga"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGC" xil_pn:name="vmecpld.ngc"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGD" xil_pn:name="vmecpld.ngd"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGR" xil_pn:name="vmecpld.ngr"/>
+    <file xil_pn:fileType="FILE_PAD_MISC" xil_pn:name="vmecpld.pad"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_PNX" xil_pn:name="vmecpld.pnx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="vmecpld.prj"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="vmecpld.rpt"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_STX" xil_pn:name="vmecpld.stx"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST_REPORT" xil_pn:name="vmecpld.syr"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_VM6" xil_pn:name="vmecpld.vm6"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="vmecpld.xml"/>
+    <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_XST" xil_pn:name="vmecpld.xst"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="vmecpld_build.xml"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="vmecpld_envsettings.html"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="vmecpld_html"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="vmecpld_ngdbuild.xrpt"/>
+    <file xil_pn:fileType="FILE_PAD_EXCEL_REPORT" xil_pn:name="vmecpld_pad.csv"/>
+    <file xil_pn:fileType="FILE_HTML" xil_pn:name="vmecpld_summary.html"/>
+    <file xil_pn:fileType="FILE_XRPT" xil_pn:name="vmecpld_xst.xrpt"/>
+    <file xil_pn:fileType="FILE_FITTER_REPORT" xil_pn:name="webtalk_pn.xml"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xlnx_auto_0_xdb"/>
+    <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="xst"/>
+  </files>
+
+  <transforms xmlns="http://www.xilinx.com/XMLSchema">
+    <transform xil_pn:end_ts="1409589175" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1409589175">
+      <status xil_pn:value="SuccessfullyRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1409589175" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="6674059311169255261" xil_pn:start_ts="1409589175">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1409592080" xil_pn:in_ck="170736076720591" xil_pn:name="TRANEXT_xstsynthesize_xbr" xil_pn:prop_ck="-4801440216397106482" xil_pn:start_ts="1409592069">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
+      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
+      <outfile xil_pn:name="vmecpld.lso"/>
+      <outfile xil_pn:name="vmecpld.ngc"/>
+      <outfile xil_pn:name="vmecpld.ngr"/>
+      <outfile xil_pn:name="vmecpld.prj"/>
+      <outfile xil_pn:name="vmecpld.stx"/>
+      <outfile xil_pn:name="vmecpld.syr"/>
+      <outfile xil_pn:name="vmecpld.xst"/>
+      <outfile xil_pn:name="vmecpld_xst.xrpt"/>
+      <outfile xil_pn:name="webtalk_pn.xml"/>
+      <outfile xil_pn:name="xst"/>
+    </transform>
+    <transform xil_pn:end_ts="1409592128" xil_pn:in_ck="185931587548725879" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="1262981286727572973" xil_pn:start_ts="1409592128">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+    </transform>
+    <transform xil_pn:end_ts="1409592136" xil_pn:in_ck="1307426820108265224" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="1690418988910260344" xil_pn:start_ts="1409592128">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <outfile xil_pn:name="_ngo"/>
+      <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+      <outfile xil_pn:name="vmecpld.bld"/>
+      <outfile xil_pn:name="vmecpld.ngd"/>
+      <outfile xil_pn:name="vmecpld_ngdbuild.xrpt"/>
+    </transform>
+    <transform xil_pn:end_ts="1409592154" xil_pn:in_ck="185931587548718386" xil_pn:name="TRANEXT_vm6File_xbr" xil_pn:prop_ck="3358394893463924765" xil_pn:start_ts="1409592136">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="WarningsGenerated"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <outfile xil_pn:name="vmecpld.chk"/>
+      <outfile xil_pn:name="vmecpld.cxt"/>
+      <outfile xil_pn:name="vmecpld.gyd"/>
+      <outfile xil_pn:name="vmecpld.log"/>
+      <outfile xil_pn:name="vmecpld.mfd"/>
+      <outfile xil_pn:name="vmecpld.nga"/>
+      <outfile xil_pn:name="vmecpld.pad"/>
+      <outfile xil_pn:name="vmecpld.pnx"/>
+      <outfile xil_pn:name="vmecpld.rpt"/>
+      <outfile xil_pn:name="vmecpld.vm6"/>
+      <outfile xil_pn:name="vmecpld.xml"/>
+      <outfile xil_pn:name="vmecpld_build.xml"/>
+      <outfile xil_pn:name="vmecpld_html"/>
+      <outfile xil_pn:name="vmecpld_pad.csv"/>
+    </transform>
+    <transform xil_pn:end_ts="1409592158" xil_pn:in_ck="185931587548727250" xil_pn:name="TRANEXT_crtProg_xbr" xil_pn:prop_ck="5245363024343" xil_pn:start_ts="1409592154">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <outfile xil_pn:name="vmecpld.jed"/>
+    </transform>
+    <transform xil_pn:name="TRAN_timRpt">
+      <status xil_pn:value="AbortedRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="InputAdded"/>
+    </transform>
+  </transforms>
+
+</generated_project>

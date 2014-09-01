@@ -1,0 +1,100 @@
+NET "CPLDCLK" TNM_NET = "CPLDCLK";
+TIMESPEC "TS_CPLDCLK" = PERIOD "CPLDCLK" 8 ns HIGH 50 %;
+
+# VME
+NET "XD<7>"   LOC = "P99" ;
+NET "XD<6>"   LOC = "P1" ;
+NET "XD<5>"   LOC = "P2" ;
+NET "XD<4>"   LOC = "P3" ;
+NET "XD<3>"   LOC = "P4" ;
+NET "XD<2>"   LOC = "P6" ;
+NET "XD<1>"   LOC = "P7" ;
+NET "XD<0>"   LOC = "P8" ;
+
+NET "XA<15>"   LOC = "P71" ;
+NET "XA<14>"   LOC = "P68" ;
+NET "XA<13>"   LOC = "P66" ;
+NET "XA<12>"   LOC = "P64" ;
+NET "XA<11>"   LOC = "P60" ;
+NET "XA<10>"   LOC = "P59" ;
+NET "XA<9>"   LOC = "P58" ;
+NET "XA<8>"   LOC = "P56" ;
+NET "XA<7>"   LOC = "P70" ;
+NET "XA<6>"   LOC = "P67" ;
+NET "XA<5>"   LOC = "P65" ;
+NET "XA<4>"   LOC = "P55" ;
+NET "XA<3>"   LOC = "P54" ;
+NET "XA<2>"   LOC = "P53" ;
+NET "XA<1>"   LOC = "P52" ;
+NET "XA<0>"   LOC = "P72" ;
+
+NET "XAM<5>"   LOC = "P89" ;
+NET "XAM<4>"   LOC = "P92" ;
+NET "XAM<3>"   LOC = "P79" ;
+NET "XAM<2>"   LOC = "P81" ;
+NET "XAM<1>"   LOC = "P82" ;
+NET "XAM<0>"   LOC = "P86" ;
+
+NET "XGA<5>"   LOC = "P97" ;
+NET "XGA<4>"   LOC = "P80" ;
+NET "XGA<3>"   LOC = "P85" ;
+NET "XGA<2>"   LOC = "P91" ;
+NET "XGA<1>"   LOC = "P95" ;
+NET "XGA<0>"   LOC = "P96" ;
+
+NET "XAS"      LOC = "P87" ;
+
+NET "XDS<1>"   LOC = "P94" ;
+NET "XDS<0>"   LOC = "P93" ;
+
+NET "XWRITE"   LOC = "P90" ;
+
+NET "XRESET"   LOC = "P76" ;
+
+NET "IACKPASS"  LOC = "P9" ;
+NET "XIACK"     LOC = "P73" ;
+NET "XIACKIN"   LOC = "P74" ;
+NET "XIACKOUT"  LOC = "P63" ;
+
+NET "XDTACK"    LOC = "P77" ;
+NET "XDTACKOE"  LOC = "P78" ;
+
+NET "DDIR"      LOC = "P61" ;
+
+# CPLD
+NET "CPLDCLK"   LOC = "P27" ;
+NET "CRST"      LOC = "P39" ;
+
+# Testpoints
+NET "TP<5>"   LOC = "P44" ;
+NET "TP<4>"   LOC = "P43" ;
+NET "TP<3>"   LOC = "P42" ;
+NET "TP<2>"   LOC = "P41" ;
+NET "TP<1>"   LOC = "P40" ;
+
+# Flash
+NET "FLASHCLK"  LOC = "P34" ;
+NET "FLASHCS"   LOC = "P32" ;
+NET "FLASHD<3>" LOC = "P33" ;
+NET "FLASHD<2>" LOC = "P35" ;
+NET "FLASHD<1>" LOC = "P37" ;
+NET "FLASHD<0>" LOC = "P36" ;
+
+# Other Xilinx's
+NET "C2X<7>"   LOC = "P17" ;
+NET "C2X<6>"   LOC = "P16" ;
+NET "C2X<5>"   LOC = "P15" ;
+NET "C2X<4>"   LOC = "P14" ;
+NET "C2X<3>"   LOC = "P13" ;
+NET "C2X<2>"   LOC = "P12" ;
+NET "C2X<1>"   LOC = "P11" ;
+NET "C2X<0>"   LOC = "P10" ;
+
+NET "M<1>"   LOC = "P19" ;
+NET "M<0>"   LOC = "P18" ;
+
+NET "DONE"   LOC = "P30" ;
+NET "PROG"   LOC = "P29" ;
+NET "INIT"   LOC = "P28" ;
+
+
