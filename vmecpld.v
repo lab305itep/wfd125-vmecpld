@@ -55,22 +55,26 @@ module vmecpld(
 	
 	assign CLK = CPLDCLK;
 	assign TP[1] = ADS;
-	assign TP[5:2] = DATA[3:0];
+	assign TP[2] = DDS;
+	assign TP[3] = XDTACK;
+	assign TP[4] = XDTACKOE;
+	assign TP[5] = DDIR;
+//	assign TP[5:2] = DATA[3:0];
 	assign M = 2'b11;
 	assign PROG = 1'b1;
 	assign FLASHCLK = 1'bz;
-	assign DDIR = 1'bz;
-	assign DTACK = 1'bz;
-	assign DTACKOE = 1'bz;
 	assign XIACKOUT = XIACKIN;
-	assign XD = 8'hzz;
 	assign FLASHD = 4'hz;
-	assign DTACK = !DDS;
-	assign DTACKOE = !(DDS || DDST);
+	assign XDTACK = !DDS;
+	assign XDTACKOE = !(DDS || DDST);
+	assign XD = (DDS && XWRITE) ? DATA : 8'hzz;
+	assign DDIR = (DDS && XWRITE) ? 1'b1 : 1'bz;
+
+	
 
 	always @(posedge CLK) begin
-		if (XAS == 1'b0 && ( XAM == 6'h2D || XAM == 6'h29 ) && XIACK == 1'b1 && XA == 16'h1793) ADS <= 1'b1;
-		if (ADS == 1'b1 && DS[0] == 1'b0) begin
+		if (XAS == 1'b0 && ( XAM == 6'h2D || XAM == 6'h29 ) && XIACK == 1'b1 && XA[15:4] == 12'h179) ADS <= 1'b1;
+		if (ADS == 1'b1 && XDS[0] == 1'b0) begin
 			DDS <= 1'b1;
 		end else begin
 			DDS <= 1'b0;
@@ -78,6 +82,9 @@ module vmecpld(
 		DDST <= DDS;
 		if (DDST == 1'b1 && DDS == 1'b0) begin
 			ADS <= 1'b0;
+		end
+		if (XWRITE == 1'b0 && DDST == 1'b0 && DDS == 1'b1) begin
+			DATA <= XD;
 		end
 	end
 
