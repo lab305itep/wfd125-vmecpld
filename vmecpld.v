@@ -67,7 +67,7 @@ module vmecpld(
 	assign FLASHD = 4'hz;
 	assign XDTACK = !DDS;
 	assign XDTACKOE = !(DDS || DDST);
-	assign XD = (DDS && XWRITE) ? DATA : 8'hzz;
+	assign XD = (DDS && XWRITE) ? {2'b00, XGA} : 8'hzz;
 	assign DDIR = (DDS && XWRITE) ? 1'b1 : 1'bz;
 
 	
