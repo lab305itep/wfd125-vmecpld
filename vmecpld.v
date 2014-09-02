@@ -73,17 +73,17 @@ module vmecpld(
 	
 
 	always @(posedge CLK) begin
-		if (XAS == 1'b0 && ( XAM == 6'h2D || XAM == 6'h29 ) && XIACK == 1'b1 && XA[15:4] == 12'h179) ADS <= 1'b1;
-		if (ADS == 1'b1 && XDS[0] == 1'b0) begin
-			DDS <= 1'b1;
+		if (!XAS && (XAM == 6'h2D || XAM == 6'h29) && XIACK && XA[15:4] == 12'h179) ADS <= 1;
+		if (ADS && !XDS[0]) begin
+			DDS <= 1;
 		end else begin
-			DDS <= 1'b0;
+			DDS <= 0;
 		end
 		DDST <= DDS;
-		if (DDST == 1'b1 && DDS == 1'b0) begin
-			ADS <= 1'b0;
+		if (DDST && !DDS) begin
+			ADS <= 0;
 		end
-		if (XWRITE == 1'b0 && DDST == 1'b0 && DDS == 1'b1) begin
+		if (!XWRITE && !DDST && DDS) begin
 			DATA <= XD;
 		end
 	end
