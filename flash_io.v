@@ -63,7 +63,7 @@ module flash_io(
 		// odd transitions 0->1, latch input MSB first
 		// 1 3 5 7 9 11 13 15
 		else if (i[0]) begin
-			ISREG <= {ISREG[7:1], SI}; 
+			ISREG <= {ISREG[6:0], SI}; 
 			FCLK <= 1;
 			if (i == 15) i <= 0;
 			else i <= i+1;
@@ -71,12 +71,10 @@ module flash_io(
 		// even transitions 1->0, change output MSB first
 		// 2 4 6 8 10 12 14
 		else begin
-			OSREG <= {OSREG[6:0], 0};
+			OSREG <= {OSREG[6:0], 1'b0};
 			FCLK <= 0;
 			i <= i+1;
 		end
-		
-
 	end
 
 endmodule
