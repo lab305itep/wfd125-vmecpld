@@ -91,7 +91,7 @@ localparam NREGS = 5;
 	assign FLASHCLK = 1'bz;
 	assign XIACKOUT = XIACKIN;
 	assign FLASHD = 4'hz;
-	assign XDTACK = (DDS) ? 0 : 1'bz;
+	assign XDTACK = (DDS) ? 0 : ( (DDST) ? 1 : 1'bz);
 	assign XDTACKOE = (DDS || DDST) ? 0 : 1'bz;
 	assign DDIR = (DDS && XWRITE) ? 1 : 1'bz;
 
@@ -124,5 +124,16 @@ localparam NREGS = 5;
 			CSR <= XD;
 		end
 	end
+	
+	flash_io FLASHIO (
+		.CLK(CLK),
+		.ENABLE(CSR[1]),
+		.WS(WS[1]),
+		.RS(RS[1]),
+		.DATA(XD),
+		.SI(FLASHD[1]),
+		.SO(FLASHD[0]),
+		.FCK(FLASHCLK)
+    );
 
 endmodule
