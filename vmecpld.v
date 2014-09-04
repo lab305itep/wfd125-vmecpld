@@ -107,7 +107,11 @@ localparam NREGS = 5;
 	// CSR
 	reg [7:0] CSR = 8'h00;
 	
-	assign CLK = CPLDCLK;
+//	assign CLK = CPLDCLK;
+	CLK_DIV2 CLK_DIV2_inst (
+      .CLKDV(CLK),    	// Divided clock output
+      .CLKIN(CPLDCLK)   // Clock input
+   );
 	assign TP[1] = ADS;
 	assign TP[2] = DDS;
 	assign TP[3] = XDTACK;
