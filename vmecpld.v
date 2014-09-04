@@ -108,7 +108,7 @@ localparam NREGS = 5;
 	reg [7:0] CSR = 8'h00;
 	
 //	assign CLK = CPLDCLK;
-	CLK_DIV2 CLK_DIV2_inst (
+	CLK_DIV8 CLK_DIV_inst (
       .CLKDV(CLK),    	// Divided clock output
       .CLKIN(CPLDCLK)   // Clock input
    );

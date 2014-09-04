@@ -1,5 +1,5 @@
 Programmer Jedec Bit Map
-Date Extracted: Thu Sep 04 20:28:14 2014
+Date Extracted: Thu Sep 04 20:58:47 2014
 
 QF55341*
 QP100*
@@ -1447,7 +1447,7 @@ Note Global Clock Mux *
 L055316 001*
 
 Note Programmable Clock Divider *
-L055319 0000*
+L055319 0011*
 
 Note Programmable Clock Delay *
 L055323 1*
@@ -1473,5 +1473,5 @@ L055338 11*
 Note VREF enable *
 L055340 1*
 
-CA32D*
-BE3D
+CA333*
+BE2F
