@@ -19,18 +19,18 @@
 //		BASE+0: CSR[7:0] (RW) Control & Status register
 //					CSR0 (RW) FLASH_CS, 1 - CS asserted if FLASH enabled, default 0
 //					CSR1 (RW) FLASH_ENB, 1 - FLASH access enabled from CPLD side, default 0
-//					CSR4 (RW) Xilix Configuration select, 0 - Xilinx Master (M=01, CPLD don't drive CCLK & DIN), 1 - Xilinx Slave (M=11, CCLK & DIN ENABLED), default 0
+//					CSR4 (RW) Xilix Configuration select: 
+//							0 - Xilinx Master (M=01, CPLD don't drive CCLK & DIN), 
+//							1 - Xilinx Slave  (M=11, CCLK & DIN driven by CPLD), 
+//							default 0, overriden by CSR1 (FLASH enable has priority)
 //					CSR5 (RW) Xilinx PROG, 1 - PROG asserted, default 0
 //					CSR6 (R)  Xilix INIT
 //					CSR7 (R)  Xilix DONE, 1 - Configured
-//		BASE+2: FDAT[7:0] (RW) Flash serial data register
-//					W - any write causes generation of 8 FLASHCLK and shifts written data to FD0 MSB first
-//					R - after 8 FLASHCLK contains received data from FD1
-//		BASE+4: XDAT[7:0] (W) Xilinx serial data register
-//					W - any write causes generation of 8 CCLK and shifts written data to DIN
-//					R - always reads 0
-//    BASE+6: SERIAL[7:0] (R) Serial Number, BASE=0xA000 + (SERIAL << 4)
-//    BASE+8: BATCH[7:0] (R) Batch Number, informative, not decoded in address
+//		BASE+2: SDAT[7:0] (RW) Serial data register
+//					W - any write causes generation of 8 SERCLK and shifts written data MSB first to FD0 (FLASH enabled) or FD1 (Xilinx slave)
+//					R - after 8 FLASHCLK contains received data from FD1 (FLASH enabled) or undefined (Xilinx Slave)
+//    BASE+4: SERIAL[7:0] (R) Serial Number, BASE=0xA000 + (SERIAL << 4)
+//    BASE+6: BATCH[7:0] (R) Batch Number, informative, not decoded in address
 //
 //
 //////////////////////////////////////////////////////////////////////////////////
@@ -93,7 +93,7 @@ module vmecpld(
 `include "serial.vh"
 
 // Current number of active registers (<= 8)
-localparam NREGS = 5;
+localparam NREGS = 4;
 
 	wire CLK;
 	// module addressed bit
@@ -106,8 +106,12 @@ localparam NREGS = 5;
 	wire [NREGS-1:0] RS;
 	// CSR
 	reg [7:0] CSR = 8'h00;
+	// serial clock from shifter
+	wire SERCLK;
+	// serial data out from shifter
+	wire SOUT;
 	
-//	assign CLK = CPLDCLK;
+//	working frequency CPLDCLK/2
 	CLK_DIV2 CLK_DIV_inst (
       .CLKDV(CLK),    	// Divided clock output
       .CLKIN(CPLDCLK)   // Clock input
@@ -117,15 +121,28 @@ localparam NREGS = 5;
 	assign TP[3] = XDTACK;
 	assign TP[4] = XDTACKOE;
 	assign TP[5] = DDIR;
-
-	assign M = 2'b11;
-	assign PROG = 1'b1;
 	assign XIACKOUT = XIACKIN;
 
-	// Flash CS is driven by CSR0 when enabled
-	assign FLASHCS = (CSR[1]) ? !CSR[0] : 1'bz;
+	// we are driving flash
+	assign FENB = CSR[1];
+	// we are driving Xilinx in slave mode (overriden by FENB)
+	assign XENB = CSR[4] & !CSR[1];
+	// Flash CS is driven by CSR0 when flash enabled
+	assign FLASHCS = (FENB) ? !CSR[0] : 1'bz;
+	// serial clock is driven by serial shifter both for flash and xilinx programming
+	assign FLASHCLK = (FENB || XENB) ? SERCLK : 1'bz;
+	// FD0 is driven by serial shifter when flash enabled
+	assign FLASHD[0] = (FENB) ? SOUT : 1'bz;
+	// FD1 is driven by serial shifter when xilinx enabled
+	assign FLASHD[1] = (XENB) ? SOUT : 1'bz;
 	// keep WP and HOLD HIGH
 	assign FLASHD[3:2] = 2'b11;
+	// serial input is always connected to FD1
+	assign SIN = FLASHD[1];
+	// Xilinx prog pin (asserted when CSR5=1), will automatically be pulled on POR
+	assign PROG = !CSR[5] && CRST;
+	// Xilinx M pins (SPI master bu default, slave serial when CPL is programming Xilinx)
+	assign M = (XENB) ? 2'b11 : 2'b01;
 	
 	// reply with DTACK=0 to DS0, leave driven as 1 one CLK after deasserting
 	assign XDTACK = (DDS) ? 0 : ( (DDST) ? 1 : 1'bz);
@@ -146,13 +163,8 @@ localparam NREGS = 5;
    endgenerate
 
 // Read registers in this top module
-	// CSR
-	assign XD = (RS[0]) ? {CSR} : 8'hzz;
-	// Serial number
-	assign XD = (RS[3]) ? {SERIAL} : 8'hzz;
-	// Batch number
-	assign XD = (RS[4]) ? {BATCH} : 8'hzz;
-	
+	// CSR or SERIAL# or BATCH#
+	assign XD = (RS[0]) ? {DONE, INIT, CSR[5:0]} : ((RS[2]) ? {SERIAL} : ((RS[3]) ? {BATCH} : 8'hzz));
 
 	always @(posedge CLK) begin
 		
@@ -178,16 +190,15 @@ localparam NREGS = 5;
 		
 	end
 	
-	// Flash connection module
-	flash_io FLASHIO (
+	// serial shift registers module
+	serial_io SERIALIO (
 		.CLK(CLK),
-		.ENABLE(CSR[1]),
 		.WS(WS[1]),
 		.RS(RS[1]),
 		.DATA(XD),
-		.SI(FLASHD[1]),
-		.SO(FLASHD[0]),
-		.FCK(FLASHCLK)
+		.SI(SIN),
+		.SO(SOUT),
+		.FCK(SERCLK)
     );
 
 endmodule
