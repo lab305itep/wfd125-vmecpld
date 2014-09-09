@@ -145,7 +145,7 @@ localparam NREGS = 4;
 	// serial input is always connected to FD1
 	assign SIN = FLASHD[1];
 	// Xilinx prog pin (asserted when CSR5=1), will automatically be pulled on POR
-	assign PROG = !CSR[5] && CRST;
+	assign PROG = (CSR[5] || !CRST) ? 0 : 1'bz;
 	// Xilinx M pins (SPI master bu default, slave serial when CPL is programming Xilinx)
 	assign M = (XENB) ? 2'b11 : 2'b01;
 	
