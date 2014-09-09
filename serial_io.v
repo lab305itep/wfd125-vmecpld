@@ -30,7 +30,9 @@ module serial_io(
 		// serial output to FLASH
 	 output SO,
 		// serial clock to FLASH
-	 output reg FCK
+	 output reg FCK,
+		// shifting in progress
+	 output reg BUSY
     );
 
 	// Output shift register
@@ -52,9 +54,13 @@ module serial_io(
 				// set data, first FCLK 1->0 transition
 				OSREG <= DATA;
 				FCK <= 0;
+				BUSY <= 1;
 				i <= 1;
 			end
-			else FCK <= 1;
+			else begin
+				FCK <= 1;
+				BUSY <= 0;
+			end
 		end
 		// odd transitions 0->1, latch input MSB first
 		// 1 3 5 7 9 11 13 15

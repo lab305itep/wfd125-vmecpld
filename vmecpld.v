@@ -96,8 +96,11 @@ module vmecpld(
 localparam NREGS = 4;
 
 	wire CLK;
-	// module addressed bit
+	// module addressed bits
+	// all regs but SDAT
 	reg ADS = 0;
+	// SDAT
+	reg ADS1 = 0;
 	// clocked data strobe and delayed
 	reg DDS = 0;
 	reg DDST = 0;
@@ -110,6 +113,8 @@ localparam NREGS = 4;
 	wire SERCLK;
 	// serial data out from shifter
 	wire SOUT;
+	// serial tansmitter is BUSY shifting
+	wire BUSY;
 	
 //	working frequency CPLDCLK/2
 	CLK_DIV2 CLK_DIV_inst (
@@ -169,11 +174,18 @@ localparam NREGS = 4;
 	always @(posedge CLK) begin
 		
 		// if regular A16 address matches
-		if (!XAS && (XAM == 6'h2D || XAM == 6'h29) && XIACK && XA[0] && XA[15:4] == (12'hA00 + SERIAL) ) ADS <= 1;
+		if (!XAS && (XAM == 6'h2D || XAM == 6'h29) && XIACK && XA[0] && XA[15:4] == (12'hA00 + SERIAL) ) begin
+			if (XA[3:1] == 1) ADS1 <= 1;
+			else ADS <= 1;
+		end
 		// if DS0 asserted (ignore DS1)
-		if (ADS && !XDS[0]) begin
-			DDS <= 1;
-		end else begin
+		if (!XDS[0]) begin
+			// delay operations and DTACK for SDAT in case prev transfer has not ended
+			if ((ADS || (ADS1 && !BUSY)) && !DDS) begin
+				DDS <= 1;
+			end
+		end 
+		else begin
 			DDS <= 0;
 		end
 		// delayed DDS
@@ -181,6 +193,7 @@ localparam NREGS = 4;
 		// finish cycle at trailing edge of DS0
 		if (DDST && !DDS) begin
 			ADS <= 0;
+			ADS1 <= 0;
 		end
 		
 		// write CSR
@@ -198,7 +211,8 @@ localparam NREGS = 4;
 		.DATA(XD),
 		.SI(SIN),
 		.SO(SOUT),
-		.FCK(SERCLK)
+		.FCK(SERCLK),
+		.BUSY(BUSY)
     );
 
 endmodule
