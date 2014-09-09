@@ -171,8 +171,16 @@ localparam NREGS = 4;
 	// CSR or SERIAL# or BATCH#
 	assign XD = (RS[0]) ? {DONE, INIT, CSR[5:0]} : ((RS[2]) ? {SERIAL} : ((RS[3]) ? {BATCH} : 8'hzz));
 
-	always @(posedge CLK) begin
-		
+  always @(posedge CLK) begin
+	// on POR
+	if (!CRST) begin
+		CSR <= 0;
+		ADS <= 0;
+		ADS1 <= 0;
+		DDS <= 0;
+		DDST <= 0;
+	end
+	else begin
 		// if regular A16 address matches
 		if (!XAS && (XAM == 6'h2D || XAM == 6'h29) && XIACK && XA[0] && XA[15:4] == (12'hA00 + SERIAL) ) begin
 			if (XA[3:1] == 1) ADS1 <= 1;
@@ -200,8 +208,8 @@ localparam NREGS = 4;
 		if (WS[0]) begin
 			CSR <= XD;
 		end
-		
 	end
+  end
 	
 	// serial shift registers module
 	serial_io SERIALIO (
