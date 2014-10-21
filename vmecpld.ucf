@@ -73,7 +73,7 @@ NET "TP<2>"   LOC = "P41" ;
 NET "TP<1>"   LOC = "P40" ;
 
 # Flash
-NET "FLASHCLK"  LOC = "P34" ;
+NET "FLASHCLK"  LOC = "P34" | FAST | DRIVE = "24" ;
 NET "FLASHCS"   LOC = "P32" ;
 NET "FLASHD<3>" LOC = "P33" ;
 NET "FLASHD<2>" LOC = "P35" ;

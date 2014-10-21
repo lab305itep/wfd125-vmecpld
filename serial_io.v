@@ -17,7 +17,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 module serial_io(
-		// sustem clock 125 MHz
+		// system clock 125 MHz
     input CLK,
 		// data write strobe
     input WS,
@@ -40,7 +40,7 @@ module serial_io(
 	// input shift register
 	reg [7:0] ISREG = 0;
 	// state machine variable
-	reg [4:0] i = 0;
+	reg [5:0] i = 0;
 
 	// read serial input register
 	assign DATA = (RS) ? ISREG : 8'hzz;
@@ -63,23 +63,24 @@ module serial_io(
 			end
 		end
 		// odd transitions 0->1, latch input MSB first
-		// 1 3 5 7 9 11 13 15
-		else if (i[0]) begin
+		// 2 6 10 14 18 22 26 30 
+		else if (i[1:0] == 2'b10) begin
 			FCK <= 1;
 			i <= i+1;
 		end
 		// even transitions 1->0, change output MSB first
-		// 2 4 6 8 10 12 14 16
-		else begin
+		// 4 8 12 16 20 24 28 32
+		else if (i[1:0] == 2'b00) begin
 			OSREG <= {OSREG[6:0], 1'b0};
 			ISREG <= {ISREG[6:0], SI}; 
-			if (i == 16) begin
+			if (i == 32) begin
 				i <= 0;
-			end
-			else begin
+			end else begin
 				FCK <= 0;
 				i <= i+1;
 			end
+		end else begin
+			i <= i+1;
 		end
 	end
 

@@ -31,7 +31,7 @@
 //					R - after 8 FLASHCLK contains received data from FD1 (FLASH enabled) or undefined (Xilinx Slave)
 //    BASE+4: SERIAL[7:0] (R) Serial Number, BASE=0xA000 + (SERIAL << 4)
 //    BASE+6: BATCH[7:0] (R) Batch Number, informative, not decoded in address
-//
+//		BASE+8: C2X pins "Geographic address assigned" - for VME CSR address space
 //
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -78,7 +78,7 @@ module vmecpld(
 		// FLASH data
     inout [3:0] FLASHD,
 		// connection to main FPGA
-    input [7:0] C2X,
+    output reg [7:0] C2X,
 		// configuration mode to main FPGA
     output [1:0] M,
 		// DONE from FPGA chain
@@ -93,7 +93,7 @@ module vmecpld(
 `include "serial.vh"
 
 // Current number of active registers (<= 8)
-localparam NREGS = 4;
+localparam NREGS = 5;
 
 	wire CLK;
 	// module addressed bits
@@ -141,7 +141,7 @@ localparam NREGS = 4;
 	// FD1 is driven by serial shifter when xilinx enabled
 	assign FLASHD[1] = (XENB) ? SOUT : 1'bz;
 	// keep WP and HOLD HIGH
-	assign FLASHD[3:2] = 2'b11;
+	assign FLASHD[3:2] = 2'bZZ;
 	// serial input is always connected to FD1
 	assign SIN = FLASHD[1];
 	// Xilinx prog pin (asserted when CSR5=1), will automatically be pulled on POR
@@ -169,7 +169,7 @@ localparam NREGS = 4;
 
 // Read registers in this top module
 	// CSR or SERIAL# or BATCH#
-	assign XD = (RS[0]) ? {DONE, INIT, CSR[5:0]} : ((RS[2]) ? {SERIAL} : ((RS[3]) ? {BATCH} : 8'hzz));
+	assign XD = (RS[0]) ? {DONE, INIT, CSR[5:0]} : ((RS[2]) ? SERIAL : ((RS[3]) ? BATCH : ((RS[4]) ? C2X : 8'hzz)));
 
   always @(posedge CLK) begin
 	// on POR
@@ -207,6 +207,10 @@ localparam NREGS = 4;
 		// write CSR
 		if (WS[0]) begin
 			CSR <= XD;
+		end
+	   // write C2X
+		if (WS[4]) begin
+			C2X <= XD;
 		end
 	end
   end
