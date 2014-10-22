@@ -22,6 +22,8 @@
   <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="cpld.xise"/>
 
   <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:fileType="FILE_CMD" xil_pn:name="_impact.cmd"/>
+    <file xil_pn:fileType="FILE_LOG" xil_pn:name="_impact.log"/>
     <file xil_pn:fileType="FILE_DIRECTORY" xil_pn:name="_ngo"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
     <file xil_pn:fileType="FILE_XMSGS" xil_pn:name="_xmsgs/xst.xmsgs"/>
@@ -71,7 +73,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1413928191" xil_pn:in_ck="1698292601005452214" xil_pn:name="TRANEXT_xstsynthesize_xbr" xil_pn:prop_ck="-4801440216397106482" xil_pn:start_ts="1413928179">
+    <transform xil_pn:end_ts="1413978542" xil_pn:in_ck="1698292601005452214" xil_pn:name="TRANEXT_xstsynthesize_xbr" xil_pn:prop_ck="-4801440216397106482" xil_pn:start_ts="1413978529">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -91,7 +93,7 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1413928198" xil_pn:in_ck="1307426820108265224" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="1690418988910260344" xil_pn:start_ts="1413928191">
+    <transform xil_pn:end_ts="1413978550" xil_pn:in_ck="1307426820108265224" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="1690418988910260344" xil_pn:start_ts="1413978542">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -101,7 +103,7 @@
       <outfile xil_pn:name="vmecpld.ngd"/>
       <outfile xil_pn:name="vmecpld_ngdbuild.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1413928212" xil_pn:in_ck="185931587548718386" xil_pn:name="TRANEXT_vm6File_xbr" xil_pn:prop_ck="3358394893463924765" xil_pn:start_ts="1413928198">
+    <transform xil_pn:end_ts="1413978562" xil_pn:in_ck="185931587548718386" xil_pn:name="TRANEXT_vm6File_xbr" xil_pn:prop_ck="3358394893463924765" xil_pn:start_ts="1413978550">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -122,10 +124,16 @@
       <outfile xil_pn:name="vmecpld_html"/>
       <outfile xil_pn:name="vmecpld_pad.csv"/>
     </transform>
-    <transform xil_pn:end_ts="1413928214" xil_pn:in_ck="185931587548727250" xil_pn:name="TRANEXT_crtProg_xbr" xil_pn:prop_ck="5245363024343" xil_pn:start_ts="1413928212">
+    <transform xil_pn:end_ts="1413978564" xil_pn:in_ck="185931587548727250" xil_pn:name="TRANEXT_crtProg_xbr" xil_pn:prop_ck="5245363024343" xil_pn:start_ts="1413978562">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="vmecpld.jed"/>
+    </transform>
+    <transform xil_pn:end_ts="1413978720" xil_pn:in_ck="185931587548713964" xil_pn:name="TRAN_configureTargetDevice_CPLD" xil_pn:prop_ck="4133637878847480967" xil_pn:start_ts="1413978720">
+      <status xil_pn:value="SuccessfullyRun"/>
+      <status xil_pn:value="ReadyToRun"/>
+      <outfile xil_pn:name="_impact.cmd"/>
+      <outfile xil_pn:name="_impact.log"/>
     </transform>
     <transform xil_pn:end_ts="1409928208" xil_pn:in_ck="185931587548727250" xil_pn:name="TRAN_timRpt" xil_pn:prop_ck="111903974446" xil_pn:start_ts="1409928205">
       <status xil_pn:value="AbortedRun"/>

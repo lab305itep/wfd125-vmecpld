@@ -31,7 +31,7 @@
 //					R - after 8 FLASHCLK contains received data from FD1 (FLASH enabled) or undefined (Xilinx Slave)
 //    BASE+4: SERIAL[7:0] (R) Serial Number, BASE=0xA000 + (SERIAL << 4)
 //    BASE+6: BATCH[7:0] (R) Batch Number, informative, not decoded in address
-//		BASE+8: C2X pins "Geographic address assigned" - for VME CSR address space
+//    BASE+8: C2X pins: C2X[4:0] "Geographic address assigned" - for VME CSR address space, C2X[7] - reset, active low
 //
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -179,6 +179,7 @@ localparam NREGS = 5;
 		ADS1 <= 0;
 		DDS <= 0;
 		DDST <= 0;
+		C2X <= 0;
 	end
 	else begin
 		// if regular A16 address matches
