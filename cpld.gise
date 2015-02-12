@@ -65,15 +65,15 @@
   </files>
 
   <transforms xmlns="http://www.xilinx.com/XMLSchema">
-    <transform xil_pn:end_ts="1409589175" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1409589175">
+    <transform xil_pn:end_ts="1423741036" xil_pn:name="TRAN_copyInitialToXSTAbstractSynthesis" xil_pn:start_ts="1423741036">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1409589175" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="6674059311169255261" xil_pn:start_ts="1409589175">
+    <transform xil_pn:end_ts="1423741036" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="6674059311169255261" xil_pn:start_ts="1423741036">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1413978542" xil_pn:in_ck="1698292601005452214" xil_pn:name="TRANEXT_xstsynthesize_xbr" xil_pn:prop_ck="-4801440216397106482" xil_pn:start_ts="1413978529">
+    <transform xil_pn:end_ts="1423752696" xil_pn:in_ck="1698292601005452214" xil_pn:name="TRANEXT_xstsynthesize_xbr" xil_pn:prop_ck="-4801440216397106482" xil_pn:start_ts="1423752685">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -89,11 +89,11 @@
       <outfile xil_pn:name="webtalk_pn.xml"/>
       <outfile xil_pn:name="xst"/>
     </transform>
-    <transform xil_pn:end_ts="1413465875" xil_pn:in_ck="185931587548725879" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="1262981286727572973" xil_pn:start_ts="1413465875">
+    <transform xil_pn:end_ts="1423741047" xil_pn:in_ck="185931587548725879" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="1262981286727572973" xil_pn:start_ts="1423741047">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
     </transform>
-    <transform xil_pn:end_ts="1413978550" xil_pn:in_ck="1307426820108265224" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="1690418988910260344" xil_pn:start_ts="1413978542">
+    <transform xil_pn:end_ts="1423752702" xil_pn:in_ck="1307426820108265224" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="1690418988910260344" xil_pn:start_ts="1423752696">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -103,7 +103,7 @@
       <outfile xil_pn:name="vmecpld.ngd"/>
       <outfile xil_pn:name="vmecpld_ngdbuild.xrpt"/>
     </transform>
-    <transform xil_pn:end_ts="1413978562" xil_pn:in_ck="185931587548718386" xil_pn:name="TRANEXT_vm6File_xbr" xil_pn:prop_ck="3358394893463924765" xil_pn:start_ts="1413978550">
+    <transform xil_pn:end_ts="1423752712" xil_pn:in_ck="185931587548718386" xil_pn:name="TRANEXT_vm6File_xbr" xil_pn:prop_ck="3358394893463924765" xil_pn:start_ts="1423752702">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="WarningsGenerated"/>
       <status xil_pn:value="ReadyToRun"/>
@@ -124,7 +124,7 @@
       <outfile xil_pn:name="vmecpld_html"/>
       <outfile xil_pn:name="vmecpld_pad.csv"/>
     </transform>
-    <transform xil_pn:end_ts="1413978564" xil_pn:in_ck="185931587548727250" xil_pn:name="TRANEXT_crtProg_xbr" xil_pn:prop_ck="5245363024343" xil_pn:start_ts="1413978562">
+    <transform xil_pn:end_ts="1423752713" xil_pn:in_ck="185931587548727250" xil_pn:name="TRANEXT_crtProg_xbr" xil_pn:prop_ck="5245363024343" xil_pn:start_ts="1423752712">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <outfile xil_pn:name="vmecpld.jed"/>
@@ -132,6 +132,8 @@
     <transform xil_pn:end_ts="1413978720" xil_pn:in_ck="185931587548713964" xil_pn:name="TRAN_configureTargetDevice_CPLD" xil_pn:prop_ck="4133637878847480967" xil_pn:start_ts="1413978720">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
       <outfile xil_pn:name="_impact.cmd"/>
       <outfile xil_pn:name="_impact.log"/>
     </transform>

@@ -184,12 +184,12 @@ localparam NREGS = 5;
 	else begin
 		// if regular A16 address matches
 		if (!XAS && (XAM == 6'h2D || XAM == 6'h29) && XIACK && XA[0] && XA[15:4] == (12'hA00 + SERIAL) ) begin
-			if (XA[3:1] == 1) ADS1 <= 1;
+			if (XA[3:2] == 0) ADS1 <= 1;		// separate ADS for SDAT and CSR (not to change FLASHCS during transfers)
 			else ADS <= 1;
 		end
 		// if DS0 asserted (ignore DS1)
 		if (!XDS[0]) begin
-			// delay operations and DTACK for SDAT in case prev transfer has not ended
+			// delay operations and DTACK for SDAT and CSR in case prev transfer has not ended
 			if ((ADS || (ADS1 && !BUSY)) && !DDS) begin
 				DDS <= 1;
 			end
