@@ -40,7 +40,7 @@
 module vmecpld(
 		// VME DATA (lower 8 bits)
     inout [7:0] XD,
-		// VME ADDR (lower 16 bits)
+		// VME ADDR (lower 16 bits), XA[0] = LWORD
     input [15:0] XA,
 		// VME address modifier
     input [5:0] XAM,
@@ -104,6 +104,9 @@ localparam NREGS = 5;
 	// clocked data strobe and delayed
 	reg DDS = 0;
 	reg DDST = 0;
+	// clocked address strob
+	reg [1:0] ASREG = 2'b11;
+	wire ASP;	// adress decoded pulse
 	// Write and read strobes
 	wire [NREGS-1:0] WS;
 	wire [NREGS-1:0] RS;
@@ -154,10 +157,11 @@ localparam NREGS = 5;
 	assign XDTACKOE = (DDS || DDST) ? 0 : 1'bz;
 	// buffer direction OUT on read operations
 	assign DDIR = (DDS && XWRITE) ? 1 : 1'bz;
+	assign ASP = (ASREG == 2'b10) ? 1 : 0;	// pulse on the rising edge of AS
 
 	// generate rad and write strobes
 	genvar i;
-   generate
+    generate
       for (i=0; i < NREGS; i=i+1) 
       begin: GWS
 			// write strobe is 1 CLK on leading edge of DS0
@@ -180,10 +184,12 @@ localparam NREGS = 5;
 		DDS <= 0;
 		DDST <= 0;
 		C2X <= 0;
+		ASREG <= 2'b11;
 	end
 	else begin
+		ASREG <= {ASREG[0], XAS};	// address strob delay register
 		// if regular A16 address matches
-		if (!XAS && (XAM == 6'h2D || XAM == 6'h29) && XIACK && XA[0] && XA[15:4] == (12'hA00 + SERIAL) ) begin
+		if (ASP && (XAM == 6'h2D || XAM == 6'h29) && XIACK && XA[0] && XA[15:4] == (12'hA00 + SERIAL) ) begin
 			if (XA[3:2] == 0) ADS1 <= 1;		// separate ADS for SDAT and CSR (not to change FLASHCS during transfers)
 			else ADS <= 1;
 		end
