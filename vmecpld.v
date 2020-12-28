@@ -110,6 +110,8 @@ localparam NREGS = 5;
 	// Write and read strobes
 	wire [NREGS-1:0] WS;
 	wire [NREGS-1:0] RS;
+	// Memorize nesessary address bits
+	reg [2:0] ADDR = 0;
 	// CSR
 	reg [7:0] CSR = 8'h00;
 	// serial clock from shifter
@@ -159,15 +161,15 @@ localparam NREGS = 5;
 	assign DDIR = (DDS && XWRITE) ? 1 : 1'bz;
 	assign ASP = (ASREG == 2'b10) ? 1 : 0;	// pulse on the rising edge of AS
 
-	// generate rad and write strobes
+	// generate read and write strobes
 	genvar i;
     generate
       for (i=0; i < NREGS; i=i+1) 
       begin: GWS
 			// write strobe is 1 CLK on leading edge of DS0
-         assign WS[i] = !XWRITE && !DDST && DDS && (XA[3:1] == i);
+         assign WS[i] = !XWRITE && !DDST && DDS && (ADDR == i);
 			// read strobe is for the whole duration of DS0
-			assign RS[i] = XWRITE && DDS && (XA[3:1] == i);
+		 assign RS[i] = XWRITE && DDS && (ADDR == i);
       end
    endgenerate
 
@@ -190,6 +192,7 @@ localparam NREGS = 5;
 		ASREG <= {ASREG[0], XAS};	// address strob delay register
 		// if regular A16 address matches
 		if (ASP && (XAM == 6'h2D || XAM == 6'h29) && XIACK && XA[0] && XA[15:4] == (12'hA00 + SERIAL) ) begin
+			ADDR <= XA[3:1];
 			if (XA[3:2] == 0) ADS1 <= 1;		// separate ADS for SDAT and CSR (not to change FLASHCS during transfers)
 			else ADS <= 1;
 		end
