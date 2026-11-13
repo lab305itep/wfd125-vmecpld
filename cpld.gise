@@ -96,6 +96,8 @@
     <transform xil_pn:end_ts="1423741047" xil_pn:in_ck="185931587548725879" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="1262981286727572973" xil_pn:start_ts="1423741047">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="InputChanged"/>
     </transform>
     <transform xil_pn:end_ts="1608913104" xil_pn:in_ck="1307426820108265224" xil_pn:name="TRAN_ngdbuild" xil_pn:prop_ck="1690418988910260344" xil_pn:start_ts="1608913101">
       <status xil_pn:value="SuccessfullyRun"/>
